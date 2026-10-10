@@ -1,0 +1,36 @@
+<DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart - QuickTrends</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <section class="cart-section">
+    <h1>Your Cart</h1>
+    <div id = "cart-container"></div>
+    <a href="checkout.html" class="checkout-button">Proceed to checkout</a>
+    </section>
+    <script>
+        let cart = JSON.parse(localStorage.getItem("cart"))||[];
+        let cartContainer = document.getElementById("cart-container");
+    if (cart.length===0){
+        cartContainer.innerHTML = "<p>Your cart is empty.</p>"; 
+    } 
+    else{
+        let total = 0;
+        cart.forEach(function(item){
+             cartContainer.innerHTML += `
+             <div class="cart-item">
+                <img src="${item.image}" alt="${item.name}" class="cart-image">
+                <p>${item.name} - ${item.price} </p>
+             </div>
+            `;
+            total += item.price;
+        });
+        cartContainer.innerHTML += "<h3>Total: " + total + "</h3>";
+    }
+    </script>
+</body>
+</html>
